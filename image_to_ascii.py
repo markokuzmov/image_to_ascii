@@ -3,7 +3,7 @@ from PIL import Image
 ASCII_CHARS = ['@', '#', 'S', '%', '?', '*', '+', ';', ':', ',', '.']
 
 def downscale_image(image, scale):
-    return image.resize((image.width // scale, image.height // scale))
+    return image.resize((image.width // scale, image.height // scale * 2))
 
 
 def grayscale_image(image):
@@ -11,8 +11,7 @@ def grayscale_image(image):
 
 
 def pixel_to_ascii(pixel):
-    return ASCII_CHARS[pixel // 23] 
-
+    return ASCII_CHARS[pixel // (256 // len(ASCII_CHARS))]
 
 def main(image, scale):
     dim = Image.open(image)
@@ -35,4 +34,4 @@ def main(image, scale):
     print(im.size)
     
 if __name__ == '__main__':
-    main('mona_lisa.jpg', 2)
+    main('mona_lisa.jpg', 1)
